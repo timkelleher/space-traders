@@ -6,6 +6,28 @@ import (
 	"github.com/pkg/errors"
 )
 
+func (c Client) RegisterAgent(callSign, faction string) error {
+	req := map[string]interface{}{"symbol": callSign, "faction": faction}
+
+	url := url + "/register"
+	resp, err := c.resty.R().
+		EnableTrace().
+		ForceContentType("application/json").
+		SetBody(req).
+		SetError(&errorResponse{}).
+		Post(url)
+	if err != nil {
+		return errors.Wrap(err, "making request")
+	}
+
+	traceResponse(resp, err)
+
+	if resp.Error() != nil {
+		return errors.New(resp.Error().(*errorResponse).Error.Message)
+	}
+	return nil
+}
+
 type MyAgentResponse struct {
 	Data struct {
 		AccountId       string `json:"accountId"`
@@ -17,7 +39,7 @@ type MyAgentResponse struct {
 	} `json:"data"`
 }
 
-func (c client) MyAgent() (*MyAgentResponse, error) {
+func (c Client) AgentData() (*MyAgentResponse, error) {
 	res := &MyAgentResponse{}
 	url := url + "/my/agent"
 	resp, err := c.resty.R().

@@ -17,16 +17,16 @@ type errorResponse struct {
 	} `json:"error"`
 }
 
-type client struct {
+type Client struct {
 	resty *resty.Client
 }
 
-func New() (*client, error) {
+func New() (*Client, error) {
 	err := godotenv.Load()
 	if err != nil {
 		return nil, err
 	}
-	return &client{resty: resty.New()}, nil
+	return &Client{resty: resty.New()}, nil
 }
 
 func traceResponse(resp *resty.Response, err error) {
