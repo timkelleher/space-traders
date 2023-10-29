@@ -22,6 +22,7 @@ func Run() {
 		Commands: []*cli.Command{
 			&agentCommands,
 			&contractCommands,
+			&factionsCommands,
 		},
 	}
 
