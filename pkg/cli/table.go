@@ -17,9 +17,8 @@ var (
 func printTable(headers []string, values [][]string) {
 	t := table.New().
 		Border(lipgloss.NormalBorder()).
-		BorderStyle(re.NewStyle().Foreground(lipgloss.Color("238"))).
+		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("99"))).
 		Headers(headers...).
-		Width(100).
 		Rows(values...).
 		StyleFunc(func(row, col int) lipgloss.Style {
 			if row == 0 {
