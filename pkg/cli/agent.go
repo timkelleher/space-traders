@@ -2,7 +2,6 @@ package cli
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 
 	"github.com/urfave/cli/v2"
@@ -24,8 +23,17 @@ var agentCommands = cli.Command{
 					return errors.New("invalid faction")
 				}
 
-				fmt.Printf("call sign: %s, faction: %s\n", callSign, faction)
-				return apiClient.RegisterAgent(callSign, faction)
+				res, err := apiClient.RegisterAgent(callSign, faction)
+				if err != nil {
+					return err
+				}
+
+				headers := []string{"Token"}
+				data := [][]string{{res.Data.Token}}
+
+				printTable(headers, data)
+
+				return nil
 			},
 		},
 		{

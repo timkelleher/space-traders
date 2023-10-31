@@ -11,9 +11,8 @@ const url = "https://api.spacetraders.io/v2"
 
 type errorResponse struct {
 	Error struct {
-		Message string           `json:"message"`
-		Code    int              `json:"code"`
-		Data    map[string][]any `json:"data"`
+		Message string `json:"message"`
+		Code    int    `json:"code"`
 	} `json:"error"`
 }
 

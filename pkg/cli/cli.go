@@ -21,8 +21,11 @@ func Run() {
 		HideHelp: true,
 		Commands: []*cli.Command{
 			&agentCommands,
+			&automationCommands,
 			&contractCommands,
 			&factionsCommands,
+			&shipsCommands,
+			&systemsCommands,
 		},
 	}
 

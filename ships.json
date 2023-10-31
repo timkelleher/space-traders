@@ -1,0 +1,431 @@
+{
+	"data": {
+		"symbol": "X1-FH96-A2",
+		"shipTypes": [
+			{
+				"type": "SHIP_SURVEYOR"
+			},
+			{
+				"type": "SHIP_LIGHT_HAULER"
+			},
+			{
+				"type": "SHIP_PROBE"
+			},
+			{
+				"type": "SHIP_MINING_DRONE"
+			},
+			{
+				"type": "SHIP_SIPHON_DRONE"
+			}
+		],
+		"transactions": [
+			{
+				"shipSymbol": "SHIP_PROBE",
+				"waypointSymbol": "X1-FH96-A2",
+				"agentSymbol": "GRANGUS",
+				"price": 14521,
+				"timestamp": "2023-10-29T12:12:37.807Z"
+			},
+			{
+				"shipSymbol": "SHIP_PROBE",
+				"waypointSymbol": "X1-FH96-A2",
+				"agentSymbol": "GRANGUS",
+				"price": 14430,
+				"timestamp": "2023-10-29T12:12:33.255Z"
+			},
+			{
+				"shipSymbol": "SHIP_SURVEYOR",
+				"waypointSymbol": "X1-FH96-A2",
+				"agentSymbol": "GRANGUS",
+				"price": 60588,
+				"timestamp": "2023-10-29T12:12:18.617Z"
+			},
+			{
+				"shipSymbol": "SHIP_MINING_DRONE",
+				"waypointSymbol": "X1-FH96-A2",
+				"agentSymbol": "ENFARIOUS",
+				"price": 55699,
+				"timestamp": "2023-10-28T18:20:07.589Z"
+			}
+		],
+		"ships": [
+			{
+				"type": "SHIP_SURVEYOR",
+				"name": "Surveyor Craft",
+				"description": "A specialized spacecraft equipped with surveying mounts, designed for detailed surveying of celestial bodies, resource identification, and scientific research.",
+				"supply": "MODERATE",
+				"activity": "STRONG",
+				"purchasePrice": 60588,
+				"frame": {
+					"symbol": "FRAME_DRONE",
+					"name": "Drone",
+					"description": "A small, unmanned spacecraft used for various tasks, such as surveillance, transportation, or combat.",
+					"moduleSlots": 3,
+					"mountingPoints": 2,
+					"fuelCapacity": 80,
+					"requirements": {
+						"power": 1,
+						"crew": -4
+					}
+				},
+				"reactor": {
+					"symbol": "REACTOR_CHEMICAL_I",
+					"name": "Chemical Reactor I",
+					"description": "A basic chemical power reactor, used to generate electricity from chemical reactions.",
+					"powerOutput": 15,
+					"requirements": {
+						"crew": 3
+					}
+				},
+				"engine": {
+					"symbol": "ENGINE_IMPULSE_DRIVE_I",
+					"name": "Impulse Drive I",
+					"description": "A basic low-energy propulsion system that generates thrust for interplanetary travel.",
+					"speed": 3,
+					"requirements": {
+						"power": 1,
+						"crew": 0
+					}
+				},
+				"modules": [
+
+				],
+				"mounts": [
+					{
+						"symbol": "MOUNT_SURVEYOR_I",
+						"name": "Surveyor I",
+						"description": "A basic survey probe that can be used to gather information about a mineral deposit.",
+						"strength": 1,
+						"deposits": [
+							"QUARTZ_SAND",
+							"SILICON_CRYSTALS",
+							"PRECIOUS_STONES",
+							"ICE_WATER",
+							"AMMONIA_ICE",
+							"IRON_ORE",
+							"COPPER_ORE",
+							"SILVER_ORE",
+							"ALUMINUM_ORE",
+							"GOLD_ORE",
+							"PLATINUM_ORE"
+						],
+						"requirements": {
+							"crew": 1,
+							"power": 1
+						}
+					}
+				],
+				"crew": {
+					"required": 0,
+					"capacity": 0
+				}
+			},
+			{
+				"type": "SHIP_LIGHT_HAULER",
+				"name": "Light Hauler",
+				"description": "A small, fast cargo ship that is designed for short-range transport of light loads.",
+				"supply": "HIGH",
+				"activity": "STRONG",
+				"purchasePrice": 183198,
+				"frame": {
+					"symbol": "FRAME_LIGHT_FREIGHTER",
+					"name": "Light Freighter",
+					"description": "A small, versatile spacecraft used for cargo transport and other commercial operations.",
+					"moduleSlots": 6,
+					"mountingPoints": 1,
+					"fuelCapacity": 600,
+					"requirements": {
+						"power": 5,
+						"crew": 40
+					}
+				},
+				"reactor": {
+					"symbol": "REACTOR_CHEMICAL_I",
+					"name": "Chemical Reactor I",
+					"description": "A basic chemical power reactor, used to generate electricity from chemical reactions.",
+					"powerOutput": 15,
+					"requirements": {
+						"crew": 3
+					}
+				},
+				"engine": {
+					"symbol": "ENGINE_ION_DRIVE_I",
+					"name": "Ion Drive I",
+					"description": "An advanced propulsion system that uses ionized particles to generate high-speed, low-thrust acceleration.",
+					"speed": 10,
+					"requirements": {
+						"power": 3,
+						"crew": 3
+					}
+				},
+				"modules": [
+					{
+						"symbol": "MODULE_CARGO_HOLD_II",
+						"name": "Expanded Cargo Hold",
+						"description": "An expanded cargo hold module that provides more efficient storage space for a ship's cargo.",
+						"capacity": 35,
+						"requirements": {
+							"crew": 2,
+							"power": 2,
+							"slots": 2
+						}
+					},
+					{
+						"symbol": "MODULE_CARGO_HOLD_II",
+						"name": "Expanded Cargo Hold",
+						"description": "An expanded cargo hold module that provides more efficient storage space for a ship's cargo.",
+						"capacity": 35,
+						"requirements": {
+							"crew": 2,
+							"power": 2,
+							"slots": 2
+						}
+					},
+					{
+						"symbol": "MODULE_CREW_QUARTERS_I",
+						"name": "Crew Quarters",
+						"description": "A module that provides living space and amenities for the crew.",
+						"capacity": 40,
+						"requirements": {
+							"crew": 2,
+							"power": 1,
+							"slots": 1
+						}
+					},
+					{
+						"symbol": "MODULE_CREW_QUARTERS_I",
+						"name": "Crew Quarters",
+						"description": "A module that provides living space and amenities for the crew.",
+						"capacity": 40,
+						"requirements": {
+							"crew": 2,
+							"power": 1,
+							"slots": 1
+						}
+					}
+				],
+				"mounts": [
+					{
+						"symbol": "MOUNT_TURRET_I",
+						"name": "Rotary Cannon",
+						"description": "A rotary cannon is a type of mounted turret that is designed to fire a high volume of rounds in rapid succession.",
+						"requirements": {
+							"power": 1,
+							"crew": 1
+						}
+					}
+				],
+				"crew": {
+					"required": 55,
+					"capacity": 80
+				}
+			},
+			{
+				"type": "SHIP_PROBE",
+				"name": "Probe Satellite",
+				"description": "A small, unmanned spacecraft that can be launched into orbit to gather data and perform basic tasks.",
+				"supply": "HIGH",
+				"activity": "WEAK",
+				"purchasePrice": 14521,
+				"frame": {
+					"symbol": "FRAME_PROBE",
+					"name": "Probe",
+					"description": "A small, unmanned spacecraft used for exploration, reconnaissance, and scientific research.",
+					"moduleSlots": 0,
+					"mountingPoints": 0,
+					"fuelCapacity": 0,
+					"requirements": {
+						"power": 1,
+						"crew": 0
+					}
+				},
+				"reactor": {
+					"symbol": "REACTOR_SOLAR_I",
+					"name": "Solar Reactor I",
+					"description": "A basic solar power reactor, used to generate electricity from solar energy.",
+					"powerOutput": 3,
+					"requirements": {
+						"crew": 0
+					}
+				},
+				"engine": {
+					"symbol": "ENGINE_IMPULSE_DRIVE_I",
+					"name": "Impulse Drive I",
+					"description": "A basic low-energy propulsion system that generates thrust for interplanetary travel.",
+					"speed": 3,
+					"requirements": {
+						"power": 1,
+						"crew": 0
+					}
+				},
+				"modules": [
+
+				],
+				"mounts": [
+
+				],
+				"crew": {
+					"required": 0,
+					"capacity": 0
+				}
+			},
+			{
+				"type": "SHIP_MINING_DRONE",
+				"name": "Mining Drone",
+				"description": "A small, unmanned spacecraft that can be used for mining operations, such as extracting valuable minerals from asteroids.",
+				"supply": "HIGH",
+				"activity": "WEAK",
+				"purchasePrice": 54945,
+				"frame": {
+					"symbol": "FRAME_DRONE",
+					"name": "Drone",
+					"description": "A small, unmanned spacecraft used for various tasks, such as surveillance, transportation, or combat.",
+					"moduleSlots": 3,
+					"mountingPoints": 2,
+					"fuelCapacity": 80,
+					"requirements": {
+						"power": 1,
+						"crew": -4
+					}
+				},
+				"reactor": {
+					"symbol": "REACTOR_CHEMICAL_I",
+					"name": "Chemical Reactor I",
+					"description": "A basic chemical power reactor, used to generate electricity from chemical reactions.",
+					"powerOutput": 15,
+					"requirements": {
+						"crew": 3
+					}
+				},
+				"engine": {
+					"symbol": "ENGINE_IMPULSE_DRIVE_I",
+					"name": "Impulse Drive I",
+					"description": "A basic low-energy propulsion system that generates thrust for interplanetary travel.",
+					"speed": 3,
+					"requirements": {
+						"power": 1,
+						"crew": 0
+					}
+				},
+				"modules": [
+					{
+						"symbol": "MODULE_CARGO_HOLD_I",
+						"name": "Cargo Hold",
+						"description": "A module that increases a ship's cargo capacity.",
+						"capacity": 10,
+						"requirements": {
+							"crew": 0,
+							"power": 1,
+							"slots": 1
+						}
+					},
+					{
+						"symbol": "MODULE_MINERAL_PROCESSOR_I",
+						"name": "Mineral Processor",
+						"description": "Crushes and processes extracted minerals and ores into their component parts, filters out impurities, and containerizes them into raw storage units.",
+						"requirements": {
+							"crew": 0,
+							"power": 1,
+							"slots": 2
+						}
+					}
+				],
+				"mounts": [
+					{
+						"symbol": "MOUNT_MINING_LASER_I",
+						"name": "Mining Laser I",
+						"description": "A basic mining laser that can be used to extract valuable minerals from asteroids and other space objects.",
+						"strength": 3,
+						"requirements": {
+							"crew": 1,
+							"power": 1
+						}
+					}
+				],
+				"crew": {
+					"required": 0,
+					"capacity": 0
+				}
+			},
+			{
+				"type": "SHIP_SIPHON_DRONE",
+				"name": "Mining Drone",
+				"description": "A small, unmanned spacecraft that can be used for siphoning operations, such as extracting valuable gases from gas giants.",
+				"supply": "HIGH",
+				"activity": "WEAK",
+				"purchasePrice": 54444,
+				"frame": {
+					"symbol": "FRAME_DRONE",
+					"name": "Drone",
+					"description": "A small, unmanned spacecraft used for various tasks, such as surveillance, transportation, or combat.",
+					"moduleSlots": 3,
+					"mountingPoints": 2,
+					"fuelCapacity": 80,
+					"requirements": {
+						"power": 1,
+						"crew": -4
+					}
+				},
+				"reactor": {
+					"symbol": "REACTOR_CHEMICAL_I",
+					"name": "Chemical Reactor I",
+					"description": "A basic chemical power reactor, used to generate electricity from chemical reactions.",
+					"powerOutput": 15,
+					"requirements": {
+						"crew": 3
+					}
+				},
+				"engine": {
+					"symbol": "ENGINE_IMPULSE_DRIVE_I",
+					"name": "Impulse Drive I",
+					"description": "A basic low-energy propulsion system that generates thrust for interplanetary travel.",
+					"speed": 3,
+					"requirements": {
+						"power": 1,
+						"crew": 0
+					}
+				},
+				"modules": [
+					{
+						"symbol": "MODULE_CARGO_HOLD_I",
+						"name": "Cargo Hold",
+						"description": "A module that increases a ship's cargo capacity.",
+						"capacity": 10,
+						"requirements": {
+							"crew": 0,
+							"power": 1,
+							"slots": 1
+						}
+					},
+					{
+						"symbol": "MODULE_GAS_PROCESSOR_I",
+						"name": "Gas Processor",
+						"description": "Filters and processes extracted gases into their component parts, filters out impurities, and containerizes them into raw storage units.",
+						"requirements": {
+							"crew": 0,
+							"power": 1,
+							"slots": 2
+						}
+					}
+				],
+				"mounts": [
+					{
+						"symbol": "MOUNT_GAS_SIPHON_I",
+						"name": "Gas Siphon I",
+						"description": "A basic gas siphon that can extract gas from gas giants and other gas-rich bodies.",
+						"strength": 10,
+						"requirements": {
+							"crew": 0,
+							"power": 1
+						}
+					}
+				],
+				"crew": {
+					"required": -1,
+					"capacity": 0
+				}
+			}
+		],
+		"modificationsFee": 100
+	}
+}

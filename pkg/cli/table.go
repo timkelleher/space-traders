@@ -32,3 +32,7 @@ func printTable(headers []string, values [][]string) {
 		})
 	fmt.Println(t)
 }
+
+func printError(err error) {
+	printTable([]string{"Error Message"}, [][]string{{err.Error()}})
+}
