@@ -94,6 +94,51 @@ var systemsCommands = cli.Command{
 			Name: "waypoints",
 			Subcommands: []*cli.Command{
 				{
+					Name:  "get",
+					Usage: "get waypoint data",
+					Action: func(cCtx *cli.Context) error {
+						systemSymbol := cCtx.Args().Get(0)
+						if systemSymbol == "" {
+							return errors.New("invalid system symbol")
+						}
+						waypointSymbol := cCtx.Args().Get(1)
+						if waypointSymbol == "" {
+							return errors.New("invalid waypoint symbol")
+						}
+
+						res, err := apiClient.GetWaypoint(systemSymbol, waypointSymbol)
+						if err != nil {
+							return err
+						}
+
+						headers := []string{
+							"System Symbol",
+							"Symbol",
+							"Type",
+							"Coordinates",
+							"Traits",
+							"Faction Symbol",
+							"Orbits",
+						}
+
+						data := [][]string{
+							{
+								res.Data.SystemSymbol,
+								res.Data.Symbol,
+								res.Data.Type,
+								fmt.Sprintf("%d,%d", res.Data.X, res.Data.Y),
+								strings.Join(res.Data.GetTraits(), "\n"),
+								res.Data.Faction.Symbol,
+								res.Data.Orbits,
+							},
+						}
+
+						printTable(headers, data)
+
+						return nil
+					},
+				},
+				{
 					Name:  "search",
 					Usage: "search for waypoints by type in a system",
 					Action: func(cCtx *cli.Context) error {
@@ -114,6 +159,7 @@ var systemsCommands = cli.Command{
 						headers := []string{
 							"System Symbol",
 							"Symbol",
+							"Type",
 							"Coordinates",
 							"Traits",
 							"Faction Symbol",
@@ -121,12 +167,13 @@ var systemsCommands = cli.Command{
 						}
 
 						var data [][]string
-						for i, waypoint := range res.Data {
+						for _, waypoint := range res.Data {
 							data = append(data, []string{
 								waypoint.SystemSymbol,
 								waypoint.Symbol,
+								waypoint.Type,
 								fmt.Sprintf("%d,%d", waypoint.X, waypoint.Y),
-								strings.Join(res.Traits(i), "\n"),
+								strings.Join(waypoint.GetTraits(), "\n"),
 								waypoint.Faction.Symbol,
 								waypoint.Orbits,
 							})
@@ -159,12 +206,12 @@ var systemsCommands = cli.Command{
 								}
 
 								var data [][]string
-								for i, waypoint := range res.Data {
+								for _, waypoint := range res.Data {
 									data = append(data, []string{
 										waypoint.SystemSymbol,
 										waypoint.Symbol,
 										fmt.Sprintf("%d,%d", waypoint.X, waypoint.Y),
-										strings.Join(res.Traits(i), "\n"),
+										strings.Join(waypoint.GetTraits(), "\n"),
 										waypoint.Faction.Symbol,
 										waypoint.Orbits,
 									})

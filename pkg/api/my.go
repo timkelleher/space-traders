@@ -597,6 +597,47 @@ func (c Client) ExtractResources(shipSymbol string) (*ExtractResourcesResponse, 
 	return res, nil
 }
 
+type ShipSurveyResponse struct {
+	Data struct {
+		Cooldown struct {
+			ShipSymbol       string    `json:"shipSymbol"`
+			TotalSeconds     int       `json:"totalSeconds"`
+			RemainingSeconds int       `json:"remainingSeconds"`
+			Expiration       time.Time `json:"expiration"`
+		} `json:"cooldown"`
+		Surveys []struct {
+			Signature string `json:"signature"`
+			Symbol    string `json:"symbol"`
+			Deposits  []struct {
+				Symbol string `json:"symbol"`
+			} `json:"deposits"`
+			Expiration time.Time `json:"expiration"`
+			Size       string    `json:"size"`
+		} `json:"surveys"`
+	} `json:"data"`
+}
+
+func (c Client) ShipSurvey(shipSymbol string) (*ShipSurveyResponse, error) {
+	res := &ShipSurveyResponse{}
+
+	url := fmt.Sprintf("%s/my/ships/%s/survey", url, shipSymbol)
+	resp, err := c.resty.R().
+		EnableTrace().
+		ForceContentType("application/json").
+		SetAuthToken(os.Getenv("SPACE_TRADERS_TOKEN")).
+		SetError(&errorResponse{}).
+		SetResult(res).
+		Post(url)
+	if err != nil {
+		return nil, errors.Wrap(err, "making request")
+	}
+	if resp.Error() != nil {
+		return nil, errors.New(resp.Error().(*errorResponse).Error.Message)
+	}
+
+	return res, nil
+}
+
 type MyShipsCargoResponse struct {
 	Data struct {
 		Capacity  int `json:"capacity"`
@@ -702,6 +743,50 @@ func (c Client) JettisonShipCargo(shipSymbol, cargoSymbol string, cargoUnits int
 	req := map[string]any{"symbol": cargoSymbol, "units": cargoUnits}
 
 	url := fmt.Sprintf("%s/my/ships/%s/jettison", url, shipSymbol)
+	resp, err := c.resty.R().
+		EnableTrace().
+		ForceContentType("application/json").
+		SetAuthToken(os.Getenv("SPACE_TRADERS_TOKEN")).
+		SetError(&errorResponse{}).
+		SetBody(req).
+		Post(url)
+	if err != nil {
+		return errors.Wrap(err, "making request")
+	}
+
+	if resp.Error() != nil {
+		return errors.New(resp.Error().(*errorResponse).Error.Message)
+	}
+
+	return nil
+}
+
+func (c Client) WarpShip(shipSymbol, systemSymbol string) error {
+	req := map[string]any{"systemSymbol": systemSymbol}
+
+	url := fmt.Sprintf("%s/my/ships/%s/warp", url, shipSymbol)
+	resp, err := c.resty.R().
+		EnableTrace().
+		ForceContentType("application/json").
+		SetAuthToken(os.Getenv("SPACE_TRADERS_TOKEN")).
+		SetError(&errorResponse{}).
+		SetBody(req).
+		Post(url)
+	if err != nil {
+		return errors.Wrap(err, "making request")
+	}
+
+	if resp.Error() != nil {
+		return errors.New(resp.Error().(*errorResponse).Error.Message)
+	}
+
+	return nil
+}
+
+func (c Client) JumpShip(shipSymbol, systemSymbol string) error {
+	req := map[string]any{"systemSymbol": systemSymbol}
+
+	url := fmt.Sprintf("%s/my/ships/%s/jump", url, shipSymbol)
 	resp, err := c.resty.R().
 		EnableTrace().
 		ForceContentType("application/json").

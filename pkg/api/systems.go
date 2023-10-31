@@ -109,30 +109,47 @@ func (c Client) GetSystem(systemSymbol string) (*GetSystemResponse, error) {
 	return res, nil
 }
 
+type WaypointResponse struct {
+	Symbol       string `json:"symbol"`
+	Type         string `json:"type"`
+	SystemSymbol string `json:"systemSymbol"`
+	X            int    `json:"x"`
+	Y            int    `json:"y"`
+	Orbitals     []struct {
+		Symbol string `json:"symbol"`
+	} `json:"orbitals"`
+	Orbits  string `json:"orbits"`
+	Faction struct {
+		Symbol string `json:"symbol"`
+	} `json:"faction"`
+	Traits []struct {
+		Symbol      string `json:"symbol"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	} `json:"traits"`
+	Modifiers []struct {
+		Symbol      string `json:"symbol"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	} `json:"modifiers"`
+	Chart struct {
+		WaypointSymbol string    `json:"waypointSymbol"`
+		SubmittedBy    string    `json:"submittedBy"`
+		SubmittedOn    time.Time `json:"submittedOn"`
+	} `json:"chart"`
+	IsUnderConstruction bool `json:"isUnderConstruction"`
+}
+
+func (wr WaypointResponse) GetTraits() []string {
+	var res []string
+	for _, trait := range wr.Traits {
+		res = append(res, trait.Name)
+	}
+	return res
+}
+
 type ListWaypointsResponse struct {
-	Data []struct {
-		SystemSymbol string `json:"systemSymbol"`
-		Symbol       string `json:"symbol"`
-		Type         string `json:"type"`
-		X            int    `json:"x"`
-		Y            int    `json:"y"`
-		Orbitals     []any  `json:"orbitals"`
-		Traits       []struct {
-			Symbol      string `json:"symbol"`
-			Name        string `json:"name"`
-			Description string `json:"description"`
-		} `json:"traits"`
-		Modifiers []any `json:"modifiers"`
-		Chart     struct {
-			SubmittedBy string    `json:"submittedBy"`
-			SubmittedOn time.Time `json:"submittedOn"`
-		} `json:"chart"`
-		Faction struct {
-			Symbol string `json:"symbol"`
-		} `json:"faction"`
-		Orbits              string `json:"orbits"`
-		IsUnderConstruction bool   `json:"isUnderConstruction"`
-	} `json:"data"`
+	Data []WaypointResponse `json:"data"`
 	Meta struct {
 		Total int `json:"total"`
 		Page  int `json:"page"`
@@ -140,12 +157,29 @@ type ListWaypointsResponse struct {
 	} `json:"meta"`
 }
 
-func (lwr ListWaypointsResponse) Traits(index int) []string {
-	var res []string
-	for _, trait := range lwr.Data[index].Traits {
-		res = append(res, trait.Name)
+type GetWaypointResponse struct {
+	Data WaypointResponse `json:"data"`
+}
+
+func (c Client) GetWaypoint(systemSymbol, waypointSymbol string) (*GetWaypointResponse, error) {
+	res := &GetWaypointResponse{}
+	url := fmt.Sprintf("%s/systems/%s/waypoints/%s", url, systemSymbol, waypointSymbol)
+	resp, err := c.resty.R().
+		EnableTrace().
+		ForceContentType("application/json").
+		SetAuthToken(os.Getenv("SPACE_TRADERS_TOKEN")).
+		SetResult(res).
+		SetError(&errorResponse{}).
+		Get(url)
+	if err != nil {
+		return nil, errors.Wrap(err, "making request")
 	}
-	return res
+
+	if resp.Error() != nil {
+		return nil, errors.New(resp.Error().(*errorResponse).Error.Message)
+	}
+
+	return res, nil
 }
 
 func (c Client) ListWaypointsByType(systemSymbol, waypointType string) (*ListWaypointsResponse, error) {

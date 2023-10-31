@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/charmbracelet/log"
 	"github.com/urfave/cli/v2"
 )
 
@@ -254,6 +255,38 @@ var shipsCommands = cli.Command{
 				}
 
 				printTable(headers, data)
+
+				return nil
+			},
+		},
+		{
+			Name:  "survey",
+			Usage: "have a ship survey resources from its current location",
+			Action: func(cCtx *cli.Context) error {
+				shipSymbol := cCtx.Args().Get(0)
+				if shipSymbol == "" {
+					return errors.New("invalid ship symbol")
+				}
+
+				res, err := apiClient.ShipSurvey(shipSymbol)
+				if err != nil {
+					printError(err)
+					return nil
+				}
+
+				headers := []string{
+					"Symbol",
+					"Units",
+				}
+
+				var data [][]string
+				for _, survey := range res.Data.Surveys {
+					data = append(data, []string{survey.Symbol, survey.Size})
+				}
+
+				printTable(headers, data)
+
+				log.Info("Survey Expiration", "remaining_seconds", res.Data.Cooldown.RemainingSeconds)
 
 				return nil
 			},

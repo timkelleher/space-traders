@@ -23,6 +23,7 @@ var contractCommands = cli.Command{
 
 				headers := []string{
 					"ID",
+					"Fulfilled",
 					"Accepted",
 					"Deadline",
 					"Faction Symbol",
@@ -34,6 +35,7 @@ var contractCommands = cli.Command{
 				for i, contract := range res.Data {
 					data = append(data, []string{
 						contract.ID,
+						strconv.FormatBool(contract.Fulfilled),
 						strconv.FormatBool(contract.Accepted),
 						contract.Terms.Deadline,
 						contract.FactionSymbol,
